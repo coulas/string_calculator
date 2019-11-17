@@ -36,4 +36,15 @@ public class StringCalculatorTest {
     void should_accept_custom_delimiter() {
         Assertions.assertEquals(3, new StringCalculator().add("//;\n1;2"));
     }
+
+    @Test
+    void should_throw_all_negatives() {
+        String message = Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new StringCalculator().add("1,-2,3,-4,5"))
+                .getMessage();
+        Assertions.assertAll(
+                () -> Assertions.assertTrue(message.contains("-2")),
+                () -> Assertions.assertTrue(message.contains("-4"))
+        );
+    }
 }

@@ -1,5 +1,8 @@
 package com.fedou.katas.stringcalculator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StringCalculator {
 
     public static final String CUSTOM_DELIMITER_PREFIX = "//";
@@ -21,9 +24,18 @@ public class StringCalculator {
             numbersToParse = numbers;
         }
         int result = 0;
+        List<Integer> negatives = new ArrayList<>();
         for (String number : numbersToParse.split(delimiter)) {
-            result += Integer.parseInt(number);
+            int value = Integer.parseInt(number);
+            if (value<0) {
+                negatives.add(value);
+            }
+            result += value;
         }
-        return result;
+        if (negatives.isEmpty()) {
+            return result;
+        } else {
+            throw new IllegalArgumentException("negatives are not allowed : "+negatives);
+        }
     }
 }
