@@ -26,4 +26,10 @@ public class StringCalculatorTest {
     void several_numbers_separated_by_comma_should_be_added() {
         Assertions.assertEquals(6, new StringCalculator().add("1,2,3"));
     }
+
+    @Test
+    void several_numbers_separated_by_comma_and_or_newline_should_be_added() {
+        Assertions.assertEquals(6, new StringCalculator().add("1\n2,3"));
+    }
+
 }
