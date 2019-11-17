@@ -16,4 +16,9 @@ public class StringCalculatorTest {
     void single_numbers_should_return_themselves(int input) {
         Assertions.assertEquals(input, new StringCalculator().add(""+input));
     }
+
+    @Test
+    void two_numbers_separated_by_comma_should_be_added() {
+        Assertions.assertEquals(3, new StringCalculator().add("1,2"));
+    }
 }

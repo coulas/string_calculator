@@ -5,6 +5,10 @@ public class StringCalculator {
         if (numbers.isEmpty()) {
             return 0;
         }
-        return Integer.parseInt(numbers);
+        int result = 0;
+        for (String number : numbers.split(",")) {
+            result += Integer.parseInt(number);
+        }
+        return result;
     }
 }
