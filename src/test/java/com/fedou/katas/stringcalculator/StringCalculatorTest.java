@@ -32,4 +32,8 @@ public class StringCalculatorTest {
         Assertions.assertEquals(6, new StringCalculator().add("1\n2,3"));
     }
 
+    @Test
+    void should_accept_custom_delimiter() {
+        Assertions.assertEquals(3, new StringCalculator().add("//;\n1;2"));
+    }
 }
