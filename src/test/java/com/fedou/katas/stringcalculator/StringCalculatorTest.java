@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class StringCalculatorTest {
     @Test
-    void truth() {
-        Assertions.assertTrue(false);
+    void empty_string_count_as_0() {
+        Assertions.assertEquals(0, new StringCalculator().add(""));
     }
 }
