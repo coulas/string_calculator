@@ -1,6 +1,7 @@
 package com.fedou.katas.stringcalculator;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -33,11 +34,6 @@ public class StringCalculatorTest {
     }
 
     @Test
-    void should_accept_custom_delimiter() {
-        Assertions.assertEquals(3, new StringCalculator().add("//;\n1;2"));
-    }
-
-    @Test
     void should_throw_all_negatives() {
         String message = Assertions.assertThrows(IllegalArgumentException.class,
                 () -> new StringCalculator().add("1,-2,3,-4,5"))
@@ -56,5 +52,11 @@ public class StringCalculatorTest {
         );
     }
 
-
+    @Nested
+    class CustomDelimiters {
+        @Test
+        void should_accept_custom_delimiter() {
+            Assertions.assertEquals(3, new StringCalculator().add("//;\n1;2"));
+        }
+    }
 }
