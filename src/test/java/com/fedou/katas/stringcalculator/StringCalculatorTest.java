@@ -61,7 +61,21 @@ public class StringCalculatorTest {
 
         @Test
         void should_accept_custom_multi_characters_delimiter() {
-            Assertions.assertEquals(6, new StringCalculator().add("//[;;]\n1;;2;;3"));
+            Assertions.assertAll(
+                    () -> Assertions.assertEquals(6, new StringCalculator().add("//[;;]\n1;;2;;3")),
+                    () -> Assertions.assertEquals(6, new StringCalculator().add("//[***]\n1***2***3"))
+            );
         }
+
+        @Test
+        void should_accept_custom_multiple_delimiters() {
+            // let's says there is no \n allowed in custom delimiters !
+            Assertions.assertAll(
+                    () -> Assertions.assertEquals(6, new StringCalculator().add("//[*][%]\n1%2*3"), "multiple delimiters"),
+                    () -> Assertions.assertEquals(6, new StringCalculator().add("//[**][%%]\n1%%2**3"), "multiple delimiters with special characters"),
+                    () -> Assertions.assertEquals(6, new StringCalculator().add("//[**][***]\n1***2**3"), "multiple delimiters with same characters of different length")
+            );
+        }
+
     }
 }

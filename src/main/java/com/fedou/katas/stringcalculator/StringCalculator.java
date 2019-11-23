@@ -1,7 +1,9 @@
 package com.fedou.katas.stringcalculator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
 
@@ -19,8 +21,18 @@ public class StringCalculator {
                     CUSTOM_DELIMITER_PREFIX.length(),
                     customDelimiterEnding);
             String[] customDelimiters = delimiterOnly.split("\\[|\\]");
-            delimiter=customDelimiters[customDelimiters.length-1];
-            numbersToParse = numbers.substring(customDelimiterEnding+1);
+            Arrays.sort(customDelimiters, (l, r) -> r.length() - l.length());
+
+            numbersToParse = numbers.substring(customDelimiterEnding + 1);
+            for (String customDelimiter : customDelimiters) {
+                if (customDelimiter.isEmpty()) {
+                    continue;
+                }
+                numbersToParse = Pattern
+                        .compile(customDelimiter, Pattern.LITERAL)
+                        .matcher(numbersToParse)
+                        .replaceAll(",");
+            }
         } else {
             numbersToParse = numbers;
         }
@@ -31,7 +43,7 @@ public class StringCalculator {
             if (value > 1000) {
                 continue;
             }
-            if (value<0) {
+            if (value < 0) {
                 negatives.add(value);
             }
             result += value;
@@ -39,7 +51,7 @@ public class StringCalculator {
         if (negatives.isEmpty()) {
             return result;
         } else {
-            throw new IllegalArgumentException("negatives are not allowed : "+negatives);
+            throw new IllegalArgumentException("negatives are not allowed : " + negatives);
         }
     }
 }
