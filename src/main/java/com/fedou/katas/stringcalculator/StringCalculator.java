@@ -15,10 +15,11 @@ public class StringCalculator {
         String numbersToParse;
         if (numbers.startsWith(CUSTOM_DELIMITER_PREFIX)) {
             int customDelimiterEnding = numbers.indexOf('\n');
-            String customDelimiter = numbers.substring(
+            String delimiterOnly = numbers.substring(
                     CUSTOM_DELIMITER_PREFIX.length(),
                     customDelimiterEnding);
-            delimiter=customDelimiter;
+            String[] customDelimiters = delimiterOnly.split("\\[|\\]");
+            delimiter=customDelimiters[customDelimiters.length-1];
             numbersToParse = numbers.substring(customDelimiterEnding+1);
         } else {
             numbersToParse = numbers;

@@ -58,5 +58,10 @@ public class StringCalculatorTest {
         void should_accept_custom_delimiter() {
             Assertions.assertEquals(3, new StringCalculator().add("//;\n1;2"));
         }
+
+        @Test
+        void should_accept_custom_multi_characters_delimiter() {
+            Assertions.assertEquals(6, new StringCalculator().add("//[;;]\n1;;2;;3"));
+        }
     }
 }
