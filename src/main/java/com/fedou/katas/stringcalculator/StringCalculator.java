@@ -27,6 +27,9 @@ public class StringCalculator {
         List<Integer> negatives = new ArrayList<>();
         for (String number : numbersToParse.split(delimiter)) {
             int value = Integer.parseInt(number);
+            if (value > 1000) {
+                continue;
+            }
             if (value<0) {
                 negatives.add(value);
             }

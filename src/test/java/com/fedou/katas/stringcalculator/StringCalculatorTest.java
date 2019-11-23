@@ -12,7 +12,7 @@ public class StringCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {1, 2, 1234})
+    @ValueSource(ints = {1, 2, 123})
     void single_numbers_should_return_themselves(int input) {
         Assertions.assertEquals(input, new StringCalculator().add("" + input));
     }
@@ -47,4 +47,14 @@ public class StringCalculatorTest {
                 () -> Assertions.assertTrue(message.contains("-4"))
         );
     }
+
+    @Test
+    void should_ignore_numbers_above_1000() {
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(6, new StringCalculator().add("1,1234,2,2345,3")),
+                () -> Assertions.assertEquals(999 + 1000, new StringCalculator().add("999,1000,1001"))
+        );
+    }
+
+
 }
